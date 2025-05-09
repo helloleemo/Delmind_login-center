@@ -9,7 +9,7 @@ export default {
           hover: "var(--color-del-primary-hover)",
           light: "var(--color-del-primary-light)",
         },
-        black: "var(--color-del-black)",
+        dblack: "var(--color-del-black)",
         gray: {
           DEFAULT: "var(--color-del-gray)",
           light: "var(--color-del-gray-light)",
