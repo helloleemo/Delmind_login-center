@@ -9,8 +9,10 @@ import ui from '@nuxt/ui/vue-plugin'
 
 const app = createApp(App)
 
+// use
 app.use(createPinia())
 app.use(router)
 app.use(ui)
 
+//mounted
 app.mount('#app')
