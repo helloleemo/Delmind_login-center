@@ -2,22 +2,51 @@
 import type { HeaderMenuItem } from '@/types/HeaderMenu'
 import { ref } from 'vue'
 
+// header menu items
 const headerMenu = ref<HeaderMenuItem[]>([
   {
     label: 'User',
-    icon: 'material-symbols:account-circle-full',
+    icon: 'material-symbols:person-outline-rounded',
     linkTo: '/',
   },
   {
-    icon: 'mdi:bell-outline',
+    name: '',
+    icon: 'material-symbols:notifications-outline-rounded',
     linkTo: '/',
   },
 
   {
-    icon: 'mdi:cog-outline',
-    linkTo: '/',
+    name: 'settings',
+    icon: 'material-symbols:settings-outline-rounded',
+    // linkTo: '/',
+    action: () => {
+      toggleSubMenu()
+    },
+  },
+  {
+    name: '',
+    icon: 'solar:sun-2-outline',
+    action: () => {
+      toggleDarkMode()
+    },
   },
 ])
+
+// dark mode toggle
+const toggleDarkMode = () => {
+  console.log('Toggle dark mode action triggered')
+  // const htmlElement = document.documentElement
+  // if (htmlElement.classList.contains('dark')) {
+  //   htmlElement.classList.remove('dark')
+  // } else {
+  //   htmlElement.classList.add('dark')
+  // }
+}
+
+// sub menu toggle
+const toggleSubMenu = () => {
+  console.log('Toggle sub menu action triggered')
+}
 </script>
 
 <template>
@@ -31,11 +60,27 @@ const headerMenu = ref<HeaderMenuItem[]>([
       </div>
       <img class="w-[120px]" src="../assets/logo.svg" alt="" />
     </div>
-    <div class="menuList">
+    <div class="menuList relative">
       <ul class="flex items-center gap-2">
-        <li v-for="(item, index) in headerMenu" :key="index" class="">
+        <li v-for="(item, index) in headerMenu" :key="index" class="relative">
+          <!-- Handle items with actions -->
+          <div
+            v-if="item.action"
+            class="flex justify-center items-center w-full rounded-sm hover:bg-gray-100 transition-colors p-2 cursor-pointer"
+            @click="item.action"
+          >
+            <UIcon :name="item.icon" class="size-5 text-gray-500" />
+            <p v-if="item.label" class="text-sm pl-2 text-gray-500">{{ item.label }}</p>
+            <div v-show="item.name === 'settings'" class="absolute top-12 border">
+              <ul>
+                <li></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Handle items with links -->
           <RouterLink
-            v-if="item.linkTo"
+            v-else-if="item.linkTo"
             :to="item.linkTo"
             class="flex justify-center items-center w-full rounded-sm hover:bg-gray-100 transition-colors p-2"
           >

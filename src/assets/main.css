@@ -2,10 +2,15 @@
 @import 'tailwindcss';
 @import '@nuxt/ui';
 
+@theme {
+  --color-primary: #3f7cd7;
+  --color-primary-light: #6da8ff;
+}
+
 #app {
   cursor: default;
   font-family: 'Inter', sans-serif;
 }
 p {
-  @apply text-gray-500;
+  @apply text-gray-600;
 }
